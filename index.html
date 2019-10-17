@@ -13,7 +13,16 @@
 
 
 <h4>What is COMBINATORIAL OPTIMIZATION PROBLEM?</h4>
-Combinatorial optimization is the process of searching for maxima (or minima) of an objective function F whose domain is a discrete but large configuration space (as opposed to an N-dimensional continuous space).
+Combinatorial optimization is the process of searching for maxima (or minima) of an objective function F whose domain is a discrete but large configuration space (as opposed to an N-dimensional continuous space).<br>
+Some  simple  examples  of  typical  combinatorial  optimization problems are:
+<ol>
+<li> Traveling Salesman Problem</li>
+<li>Bin-Packing</li>
+<li>Subset Sum Problem</li>
+<li>Knapsack Problem</li>
+<li>Hamiltonian path problem</li>
+</ol>
+In this project we will be working on the Subset Sum Problem
 
 <h4> What is <b>SUBSET SUM PROBLEM </b>?</h4>
 The <b>Subset Sum Problem</b> belongs to category of decision problems.  The problem states that given a set (or multiset) of integers, is it possible to construct a non-empty subset whose sum is equal to zero?
@@ -44,7 +53,19 @@ it should at least be Quantum advantageous.In other words it is
 sufficient enough for us to show that the complexity achieved
 from the Quantum Computing should be less than O(2<sup>n</sup>
 ). 
-
+<h4>CHALLENGES</h4>
+<ol>
+<li>Figure out a way to construct circuit and determine what
+gates to use.</li>
+<li>The  Qiskit  right  now  supports  till  30  Qubits.  So  the
+maximum element number of elements in our array for
+our input should be way less than 30.</li>
+<li>One  of  the  biggest  problem  would  be  to  optimize  the
+use  of  ancilla  bits  so  that  we  can  use  more  and  more
+qubits for the input.</li>
+<li>Determine  whether  the  problem  falls  under  Quantum
+supremacy class or quantum advantage class.</li>
+</ol>
 
 <h4>REFERENCE PAPER</h4>
 [1]  https://en.wikipedia.org/wiki/NP-completeness<br>
