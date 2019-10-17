@@ -1,0 +1,46 @@
+<!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+               
+                
+<h1 align="center"> ECE-592 / CSC-591  PROJECT TOPIC: Combinatorial Optimization </h1>
+<h2 align="center"> Subset Sum Problem</h2>
+<h3 >-----------Under professor Greg Byrd</h3>
+<h3 align="right"> Atharva Gupta and Kushal Batra</h3>   
+
+
+
+
+<h4>What is COMBINATORIAL OPTIMIZATION PROBLEM?</h4>
+Combinatorial optimization is the process of searching for maxima (or minima) of an objective function F whose domain is a discrete but large configuration space (as opposed to an N-dimensional continuous space).
+
+<h4> What is <b>SUBSET SUM PROBLEM </b>?</h4>
+The <b>Subset Sum Problem</b> belongs to category of decision problems.  The problem states that given a set (or multiset) of integers, is it possible to construct a non-empty subset whose sum is equal to zero?
+ 
+<p>For example, given the set { − 40 , − 2 , 1 , 2 , 3 , 4 , 5 , 6 }  , the answer is "yes" because the subset { − 2 , 2 } sums to zero.
+The <b>Subset Sum Problem</b> belongs to complexity class of NP-complete, meaning it is easier to evaluate whether the final result obtained is correct or not. Also, this checking can be done in polynomial time. The problem itself takes non-deterministic polynomial time to find the solution. The <b>subset sum problem</b> is used in the field of complexity theory and cryptography.
+<p>In computational complexity theory, a problem is NP-complete when it can be solved by a restricted class of brute force search algorithms and it can be used to simulate any other problem with a similar algorithm. More precisely, each input to the problem should be associated with a set of solutions of polynomial length, whose validity can be tested quickly (in polynomial time), such that the output for any input is "yes" if the solution set is non-empty and "no" if it is empty (<i>source : <a href='https://en.wikipedia.org/wiki/NP-completeness'> wikipedia</a></i>).
+
+The <b>Subset Sum Problem</b> can be thought of as a modification to <b>knapsack problem</b> where the limit of the bag is infinite and the assumption that the weight of the elements can ne negative.
+
+<h4>OTHER VARIATIONS OF THE PROBLEM</h4>
+<ol>
+<li><b>Subset Sum Problem</b> where the sum is equal to some constant. This variation is extenion of the question such that the sum instead of 0 can be any other integer <i>k</i> <br>Example - Suppose the parent set is {− 2 , 0 , 1 , 3}. and we are find subset such that sum equals 2. The answer is "yes" the subset {− 2 , 1 ,  3}  gives the sum=<i>2</i>.</li><br>
+<li><b>Subset Sum Problem</b> where it is posibble to subdivide this set into two strict subsets such that the sum of elements of one set is equal to another set. 
+<br>Example - Suppose the parent set is {− 2 , 0 , 1 , 3}. The answer is "yes" the subsets are {− 2 ,  3} and {0 , 1 } where the sum of elements is <i>1</i></li>.
+</ol>
+For simplicity we will just be working with the simple variation where the subset sum has to be equal to <i>0</i>.
+
+<h4> PROJECT PROPOSAL AND APPROACH </h4>
+
+For our project we will try to implement the <b>Subset Sum Problem</b> problem using Qunatum Computers. We will try to run it in Qiskit . So suppose we have 'x' elements in our set and we are supposed to find the subset with 'm' elements such that <i>m<=x</i> and the sum of 'm' elements =0. So to work with Quantum Circuits we wll have 'x' Qubits as our input to the circuit and then the output will be in terms of quibit value {0,1}. If the i<sup>th </sup>line's output is '0' it signifies that the i<sup>th  </sup> element is not included in our answer. Similarly, If the i<sup>th  </sup>line's output is '1' it signifies that the i<sup>th  </sup> element is included in our answer.   
+
+
+<h4>REFERENCE PAPER</h4>
+
+             
+</ol>
+<BR>
+------------------------------------------------------------------
+</body>
+</html>
