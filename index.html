@@ -1,12 +1,13 @@
 <!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
 <html>
-<head>
-               
+<head>        
                 
 <h1 align="center"> ECE-592 / CSC-591  PROJECT TOPIC: Combinatorial Optimization </h1>
 <h2 align="center"> Subset Sum Problem</h2>
 <h3 >-----------Under professor Greg Byrd</h3>
-<h3 align="right"> Atharva Gupta and Kushal Batra</h3>   
+<h3 align="right"> Atharva Gupta and Kushal Batra</h3>  
+
+       <marquee><a href="QC.pdf">Project.pdf</a></marquee> 
 
 
 
@@ -33,10 +34,37 @@ For simplicity we will just be working with the simple variation where the subse
 
 <h4> PROJECT PROPOSAL AND APPROACH </h4>
 
-For our project we will try to implement the <b>Subset Sum Problem</b> problem using Qunatum Computers. We will try to run it in Qiskit . So suppose we have 'x' elements in our set and we are supposed to find the subset with 'm' elements such that <i>m<=x</i> and the sum of 'm' elements =0. So to work with Quantum Circuits we wll have 'x' Qubits as our input to the circuit and then the output will be in terms of quibit value {0,1}. If the i<sup>th </sup>line's output is '0' it signifies that the i<sup>th  </sup> element is not included in our answer. Similarly, If the i<sup>th  </sup>line's output is '1' it signifies that the i<sup>th  </sup> element is included in our answer.   
+For our project we will try to implement the <b>Subset Sum Problem</b> problem using Qunatum Computers. We will try to run it in Qiskit . So suppose we have 'x' elements in our set and we are supposed to find the subset with 'm' elements such that <i>m<=x</i> and the sum of 'm' elements =0. So to work with Quantum Circuits we wll have 'x' Qubits as our input to the circuit and then the output will be in terms of quibit value {0,1}. If the i<sup>th </sup>line's output is '0' it signifies that the i<sup>th  </sup> element is not included in our answer. Similarly, If the i<sup>th  </sup>line's output is '1' it signifies that the i<sup>th  </sup> element is included in our answer.  
+<p>
+In Classical Computing world, the problem of Subset Sum
+Problem  has  complexity  of  O(2<sup>n</sup>
+).  The  objective  of  our  approach is to achieve Quantum Supremacy. Even if we are not
+able to show that the algorithm produces Quantum Supremacy
+it should at least be Quantum advantageous.In other words it is
+sufficient enough for us to show that the complexity achieved
+from the Quantum Computing should be less than O(2<sup>n</sup>
+). 
 
 
 <h4>REFERENCE PAPER</h4>
+[1]  https://en.wikipedia.org/wiki/NP-completeness<br>
+[2]  Bani-Ahmad, Sulieman. (2015). The Subset-Sum Problem: Revisited with
+an Improved Approximated Solution. International Journal of Computer
+Applications. 114. 10.5120/20043-7214.<br>
+[3]  Bernstein,  Daniel    Jeffery,  Stacey    Lange,  Tanja    Meurer,  Alexander.
+(2013). Quantum Algorithms for the Subset-Sum Problem. 10.1007/978-
+3-642-38616-9-2.<br>
+[4]  Daskin, Ammar. (2017). A Quantum Approach to Subset-Sum and Similar
+Problems.<br>
+[5]  Flaxman,  Abraham  &  Przydatek,  Bartosz.  (2005).  Solving  Medium-
+Density  Subset  Sum  Problems  in  Expected  Polynomial  Time.  Lecture
+Notes  in  Computer  Science.  3404.  305-314.  10.1007/978-3-540-31856-
+9
+25.<br>
+[6]  Zahedinejad, Ehsan & Zaribafiyan, Arman. (2017). Combinatorial Opti-
+mization on Gate Model Quantum Computers: A Survey.<br>
+[7]  Lobe,  Elisabeth.  (2017).  Solving  Combinatorial  Optimization  Problems
+via D-Wave’s Quantum Annealer<br>
 
              
 </ol>
