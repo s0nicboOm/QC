@@ -32,7 +32,8 @@ The <b>Subset Sum Problem</b> can be thought of as a modification to <b>knapsack
 For our project we will try to implement the <b>Subset Sum Problem</b> problem using Quantum Computers.So suppose we have 'x' elements in our set and we are supposed to find the subset with 'm' elements such that <i>m<=x</i> and the sum of 'm' elements =0. So to work with Quantum Circuits we wll have 'x' Qubits as our input to the circuit and then the output will be in terms of quibit value {0,1}. If the i<sup>th </sup>line's output is '0' it signifies that the i<sup>th  </sup> element is not included in our answer. Similarly, If the i<sup>th  </sup>line's output is '1' it signifies that the i<sup>th  </sup> element is included in our answer. 
 <br>
 <br>
-In our poject we will be working on both the QAOA algorithm in Qiskit and the Quantum Annealing algorithm in DWAVE system. Objective of our project is to compare the two algorithms and try to compare the results obtained from both the methods and finally create an analysis table about it.
+In our poject we will be working on both the QAOA algorithm in Qiskit and the Quantum Annealing algorithm in DWAVE system. Objective of our project is to compare the two algorithms and try to compare the results obtained from both the methods and finally create an analysis table about it.<br>
+Finally we will be comparing these two approaches with the exsisting classical approach.
 
 
 <h4>Theory of QAOA (Quantum Approximate Optimization Algorithm)</h4>
@@ -67,7 +68,7 @@ So let us assume that the cost function for our problem is C. <br><br> <b>C =   
 
 
 After researching about the QUBO formulation and the theory behind it (like what are the constraints of establishing the QUBO given the constraints in 2-ising Hamiltonian model etc) we are still brainstorming about this formulation.We also analyzed whether even it is possible to construct QUBO for the problem or not using the Quantum Apprentice sheet(for 2 qubit ,3 qubit,4 qubit,5 qubit and 6 qubit) which indicates that the solution for this problem is feasible but the approach to identify it mathematically is difficult <br><br>
-
+<br>In the paper <b>"Quantum Algorithms of the Subset-Sum Problem on a Quantum Computer" </b>by <b>Weng-Long Chang et al</b> the authors discuss the approach of using Nuclear Magnetic resonance(<b>NMR</b>) to solve this problem.As discussed by authors in the paper they have stated that the QUBO implementation for the problem is challenging.<p>  
 So the above two challenges are crucial for the given problem. We are still working to overcome these challenges but if time does not permit then we are planning to implement a special variation of Subset Sum Problem which is Set Partition Problem using both QAOA and DWave system. 
 In the Set Partiton Problem we divide the parent set into subsets such that the sum of these two subsets are equal for this problem we can device the QUBO in the following manner -<br><br>
 Let <b>S={s<sub>1</sub>,s<sub>2</sub>,s<sub>3</sub>..............s<sub>m</sub>}</b>
@@ -81,7 +82,7 @@ Hence this problem of ours can be implemented on QAOA.
 <ol>
 <li>Try to figure out the Data Structure to store the QUBO. All the problems described in the Qiskit are for graps and our example does not deal with graphs.</li>
 <li>How many elements can we have in our set?</li>
-<li>Instead of two can we make 3 o more subsets</li>
+<li>Instead of two can we make 3 or more subsets such that some is equal for all of them?</li>
 </ol>
 
 <h4>DWave (Quantum Annealing)</h4>
@@ -89,15 +90,21 @@ Quantum annealing (QA) is a metaheuristic for finding the global minimum of a gi
 From the implementation of QAOA we can extract the QUBO and plug it into the DWAVE program.
 <p>
 The QUBO Formulation :
-<b>minimize Y=X<sup>T</sup>QX</b>
-<br>
-To convert <b>Y</b> into symmetric form we can replace <b> q<sub>ij</sub> </b>by <b>(q<sub>ij</sub>+q<sub>ji</sub>)/2</b> where i is not equal to j. 
+<b>minimize Y=X<sup>T</sup>QX</b><br>
 
+To convert <b>Y</b> into symmetric form we can replace <b> q<sub>ij</sub> </b>by <b>(q<sub>ij</sub>+q<sub>ji</sub>)/2</b> where i is not equal to j. 
+<br>
+
+This information that we are extracting is from the QAOA . We will be using this QUBO information and then construct the implicit and explicit embedding for it.
+<h4>Challenges in DWave</h4>
+<ol>
+<li>As the number of elements increases or decreases in our problem set the problem of fitting the problem in our 4x4 Bipartite graph changes.<br>
+<i><u>Solution:</u></i> We can do is implicit embedding reducing the complexity.But this may reduce the accuracy of our results. </li>
+</ol>
 <h4>Classical Approach</h4>
 
 Using Dyamic programming the best solution is in terms of <b>O(2<sup>n</sup>)</b>. This is an exponential complexity which increases heavily with larger n.
 There are various code available online for the following subset sum problem.
- <u>example <a href = 'https://www.geeksforgeeks.org/subset-sum-problem-dp-25/'></u></a>
 
 <h4>Timeline and individual Contribution<h4>
 <table border='2'>
@@ -109,9 +116,9 @@ There are various code available online for the following subset sum problem.
   </tr>
   <tr>
     <td><b>Week 1</b></td>
-    <td>Understand the problem. Select the algorithm to work on</td> 
-    <td>Understand the problem. Select the algorithm to work on</td>
-    <td></td>
+    <td>Understand the problem. Select the algorithm to work on+ maintain project report</td> 
+    <td>Understand the problem. Select the algorithm to work on+ maintain website</td>
+    <td>---------------------</td>
   </tr>
   <tr>
     <td><b>Oct 28</b></td>
@@ -122,8 +129,8 @@ There are various code available online for the following subset sum problem.
 
   <tr>
     <td><b>Week 2</b></td>
-    <td>Implementation using  D-Wave(Quantum Annealing) + identify the challenges</td> 
-    <td>Implementation using  Qiskit(QAOA) + identify the challenges</td>
+    <td>Work on Implementation using  D-Wave(Quantum Annealing) + Explore research papers, other examples and then identify the challenges explicitly for our problem</td> 
+    <td>Work on Implementation using  Qiskit(QAOA) + Explore research papers, other examples like TSP, Vehivcle routing problems and then identify the challenges explicitly for our problem</td>
     <td>discuss challenges and look for alternate solutions</td>
   </tr>
 
@@ -133,7 +140,18 @@ There are various code available online for the following subset sum problem.
     <td>Figure out the QUBO for Subset Sum Problem + Work on Special case of Subset Sum Problem (Set Partiton problem) in Qiskit(QAOA) </td>
     <td>Discuss with TA or professor on how to formulate QUBO for Subset Sum Problem and keep working on special case as a backup  </td>
   </tr>
-
+<tr>
+    <td><b>Week 4</b></td>
+    <td>Complete the implementation in DWave(Quantum Annealing)</td> 
+    <td>Complete the implementation in Qiskit(QAOA) </td>
+    <td>Discuss about various assumptions made for our problem</td>
+</tr>
+<tr>
+    <td><b>Week 5</b></td>
+    <td>Do comparison analysis of various algortihms used for our problem</td> 
+    <td>Do comparison analysis of various algortihms used for our problem</td>
+    <td>Discuss and create final report for our solution</td>
+</tr>
 </table>
 
 <h4>REFERENCE PAPER</h4>
@@ -155,7 +173,19 @@ Notes  in  Computer  Science.  3404.  305-314.  10.1007/978-3-540-31856-
 mization on Gate Model Quantum Computers: A Survey.<br>
 [7]  Lobe,  Elisabeth.  (2017).  Solving  Combinatorial  Optimization  Problems
 via D-Wave’s Quantum Annealer<br>
-
+[8]Dinneen, Michael J; Hua, Richard; Calude, Cristian S
+Theoretical Computer Science, Vol. 701, pp. 54 - 69.
+<br>[9]A QUBO Model for the Traveling Salesman Problem with Time Windows 
+by Papalitsas, Christos; Andronikos, Theodore; Giannakis, Konstantinos;
+Algorithms, 10/2019, Volume 12, Issue 11
+<br>[10]Constraint Embedding for Solving Optimization Problems on Quantum Annealers 
+by Vyskocil, Tomas; Djidjev, Hristo 
+2019 IEEE International Parallel and Distributed Processing Symposium Workshops (IPDPSW), 05/2019
+<br>[11]Quantum algorithms for algebraic problems 
+by Childs, Andrew M; van Dam, Wim 
+Reviews of Modern Physics, 01/2010, Volume 82, Issue 1
+<br>[12]Quantum Algorithms of the Subset-Sum Problem on a Quantum Computer 
+by Weng-Long Chang; Ting-Ting Ren; Mang Feng;2009 WASE International Conference on Information Engineering, 07/2009
              
 </ol>
 <BR>
