@@ -7,22 +7,9 @@
 <h3 >Under professor Greg Byrd</h3>
 <h3 align="right"> Atharva Gupta and Kushal Batra</h3>  
 
-       <marquee><a href="QC.pdf">Project.pdf</a></marquee> 
+       <marquee><a href="QC.pdf">Project_v1.pdf</a> |||  <a href="QC2.pdf">Project_v2.pdf</a></marquee> 
 
 
-
-
-<h4>What is COMBINATORIAL OPTIMIZATION PROBLEM?</h4>
-Combinatorial optimization is the process of searching for maxima (or minima) of an objective function F whose domain is a discrete but large configuration space (as opposed to an N-dimensional continuous space).<br>
-Some  simple  examples  of  typical  combinatorial  optimization problems are:
-<ol>
-<li> Traveling Salesman Problem</li>
-<li>Bin-Packing</li>
-<li>Subset Sum Problem</li>
-<li>Knapsack Problem</li>
-<li>Hamiltonian path problem</li>
-</ol>
-In this project we will be working on the Subset Sum Problem
 
 <h4> What is <b>SUBSET SUM PROBLEM </b>?</h4>
 The <b>Subset Sum Problem</b> belongs to category of decision problems.  The problem states that given a set (or multiset) of integers, is it possible to construct a non-empty subset whose sum is equal to zero?
@@ -39,33 +26,115 @@ The <b>Subset Sum Problem</b> can be thought of as a modification to <b>knapsack
 <li><b>Subset Sum Problem</b> where it is posibble to subdivide this set into two strict subsets such that the sum of elements of one set is equal to another set. 
 <br>Example - Suppose the parent set is {− 2 , 0 , 1 , 3}. The answer is "yes" the subsets are {− 2 ,  3} and {0 , 1 } where the sum of elements is <i>1</i></li>.
 </ol>
-For simplicity we will just be working with the simple variation where the subset sum has to be equal to <i>0</i>.
 
-<h4> PROJECT PROPOSAL AND APPROACH </h4>
+<h4> PROJECT APPROACH </h4>
 
-For our project we will try to implement the <b>Subset Sum Problem</b> problem using Qunatum Computers. We will try to run it in Qiskit . So suppose we have 'x' elements in our set and we are supposed to find the subset with 'm' elements such that <i>m<=x</i> and the sum of 'm' elements =0. So to work with Quantum Circuits we wll have 'x' Qubits as our input to the circuit and then the output will be in terms of quibit value {0,1}. If the i<sup>th </sup>line's output is '0' it signifies that the i<sup>th  </sup> element is not included in our answer. Similarly, If the i<sup>th  </sup>line's output is '1' it signifies that the i<sup>th  </sup> element is included in our answer.  
-<p>
-In Classical Computing world, the problem of Subset Sum
-Problem  has  complexity  of  O(2<sup>n</sup>
-).  The  objective  of  our  approach is to achieve Quantum Supremacy. Even if we are not
-able to show that the algorithm produces Quantum Supremacy
-it should at least be Quantum advantageous.In other words it is
-sufficient enough for us to show that the complexity achieved
-from the Quantum Computing should be less than O(2<sup>n</sup>
-). 
-<h4>CHALLENGES</h4>
+For our project we will try to implement the <b>Subset Sum Problem</b> problem using Quantum Computers.So suppose we have 'x' elements in our set and we are supposed to find the subset with 'm' elements such that <i>m<=x</i> and the sum of 'm' elements =0. So to work with Quantum Circuits we wll have 'x' Qubits as our input to the circuit and then the output will be in terms of quibit value {0,1}. If the i<sup>th </sup>line's output is '0' it signifies that the i<sup>th  </sup> element is not included in our answer. Similarly, If the i<sup>th  </sup>line's output is '1' it signifies that the i<sup>th  </sup> element is included in our answer. 
+<br>
+<br>
+In our poject we will be working on both the QAOA algorithm in Qiskit and the Quantum Annealing algorithm in DWAVE system. Objective of our project is to compare the two algorithms and try to compare the results obtained from both the methods and finally create an analysis table about it.
+
+
+<h4>Theory of QAOA (Quantum Approximate Optimization Algorithm)</h4>
+For combinatorial optimization, the Quantum Approximate Optimization Algorithm (QAOA)gives better results than classical algorithms.
+The heart of the QAOA relies on the use of unitary operators dependent on 2 p angles, where p > 1 is an input integer. These operators are iteratively applied on a state that is an equal-weighted quantum superposition of all the possible states in the computational basis. In each iteration, the state is measured in the computational basis and 
+<b>C ( z )</b> is calculated. After a sufficient number of repetitions, the value of <b>C ( z )</b> is almost optimal, and the state being measured is close to being optimal as well. 
+(<i>source : <a href='https://en.wikipedia.org/wiki/Quantum_optimization_algorithms'> wikipedia</a></i>)
+Combinatorial optimization problems are speciﬁed by n bits and m clauses. Each clause
+is a constraint on a subset of the bits which is satisﬁed for certain assignments of those bits
+and unsatisﬁed for the other assignments. The objective function, deﬁned on n bit strings,
+is the number of satisﬁed clauses,
+<b>C(z) = <span>&Sigma;  </span>C<sub>α</sub>(z)</b>
+where <b>z = z <sub>1</sub>,z <sub>2</sub> ...,z<sub>n</sub></b> is the bit string and <b>C<sub>α</sub>(z) = 1 </b>if z satisﬁes clause α and 0 otherwise. Typically <b>C<sub>α</sub></b> depends on only a few of the n bits. Satisﬁability asks if there is a stringthat satisﬁes every clause. In the QAOA algorithm our motive is to find Approximate Optimization(To find a string (z) for which <b>C(z)</b> is close to the maximum).
+
+
+<h4>QAOA (Qiskit) for our problem</h4>
+To implement QAOA we will be using Qiskit Aqua as it has well pre-defined libraries to make our task simpler. The Qiskit itself provides implementation examples of TSP problem,Vertex cut problem which act as the foundation for our implementation.The next step in designing the QAOA is to create a cost function for our problem. This will be really helpful because using this we can also design the QUBO for our DWAVE simulation. Also we will be trying to show the reslts obtained using SPSA and COBYLA optimizers.
+<br>
+<i>One assumption we have made for our problem is that we have the sum m in the subset that we are asking our code to find</i> <br>
+So let us assume that the cost function for our problem is C. <br><br> <b>C =   <span>&Sigma;  </span>X<sub>i</sub> a<sub>i</sub></b> for i =1 to number of elements in our set, where <b></span>X<sub>i</sub></b> belongs to {1,0} 1: if that element is taken in our final solution set 0: if not taken in our final solution set and a<sub>i</sub> is the i<sup>th</sup> element in our initial set.
+ 
+
+
+<h4>Challenges with this cost function</h4>
 <ol>
-<li>Figure out a way to construct circuit and determine what
-gates to use.</li>
-<li>The  Qiskit  right  now  supports  till  30  Qubits.  So  the
-maximum element number of elements in our array for
-our input should be way less than 30.</li>
-<li>One  of  the  biggest  problem  would  be  to  optimize  the
-use  of  ancilla  bits  so  that  we  can  use  more  and  more
-qubits for the input.</li>
-<li>Determine  whether  the  problem  falls  under  Quantum
-supremacy class or quantum advantage class.</li>
+<li>The cost function is known but it's QUBO formulation is still unknown. </li>
+<i><u>Reason</u></i> The above Cost function we have written is not in the form QUBO. The QUBO format should be in terms of <b> X<sup>T</sup>QX </b>which is not the case with us. This is essential because in QAOA or any other optimization algorithm, the first step is to generate the QUBO and then try to minimize or maximize it. But the cost function we have is not in that form.
+<br>
+<li>Let us for a while assume that the cost function we established is correct. The problem arises is to determine what the minimum energy level will be for the given sum.</li>
+<i><u>Reason</u></i> We dont know whether minimizing or maximizing the cost function will yield lowest energy level or not. 
 </ol>
+
+
+After researching about the QUBO formulation and the theory behind it (like what are the constraints of establishing the QUBO given the constraints in 2-ising Hamiltonian model etc) we are still brainstorming about this formulation.We also analyzed whether even it is possible to construct QUBO for the problem or not using the Quantum Apprentice sheet(for 2 qubit ,3 qubit,4 qubit,5 qubit and 6 qubit) which indicates that the solution for this problem is feasible but the approach to identify it mathematically is difficult <br><br>
+
+So the above two challenges are crucial for the given problem. We are still working to overcome these challenges but if time does not permit then we are planning to implement a special variation of Subset Sum Problem which is Set Partition Problem using both QAOA and DWave system. 
+In the Set Partiton Problem we divide the parent set into subsets such that the sum of these two subsets are equal for this problem we can device the QUBO in the following manner -<br><br>
+Let <b>S={s<sub>1</sub>,s<sub>2</sub>,s<sub>3</sub>..............s<sub>m</sub>}</b>
+
+So our <b>cost function(C) = </b>difference between <b><span>&Sigma;  </span>X<sub>i</sub> S<sub>i</sub></b> and <b><span>&Sigma;  </span>S<sub>i</sub> -<span>&Sigma;  </span>X<sub>i</sub> S<sub>i</sub> </b>for <b>i =1 to m </b> in our set, where </span>X<sub>i</sub> belongs to {1,0} 1: if that element is taken in our final solution set 0: if not taken in our final solution set and <b>S<sub>i</sub> is the i<sup>th</sup></b> element in our initial set.
+On further simplification, the equation reduces to <b>c<sup>2</sup>+4X<sup>T</sup>QX</b> where <b>c=<span>&Sigma;  </span>S<sub>i</sub></b>
+
+Hence this problem of ours can be implemented on QAOA.
+
+<h4>Challenges in Set Partition Problem</h4>
+<ol>
+<li>Try to figure out the Data Structure to store the QUBO. All the problems described in the Qiskit are for graps and our example does not deal with graphs.</li>
+<li>How many elements can we have in our set?</li>
+<li>Instead of two can we make 3 o more subsets</li>
+</ol>
+
+<h4>DWave (Quantum Annealing)</h4>
+Quantum annealing (QA) is a metaheuristic for finding the global minimum of a given objective function over a given set of candidate states (candidate solutions), by a process using quantum tunneling. Quantum annealing is used mainly for problems where the search space is discrete (combinatorial optimization problems) with many local minima; such as finding the ground state of a spin glass.This system uses a 128 qubits.D-Wave's architecture differs from traditional quantum computers. It is not known to be polynomially equivalent to a universal quantum computer and, in particular, cannot execute Shor's algorithm because Shor's algorithm is not a hill climbing process. Shor's algorithm requires a universal quantum computer. D-Wave claims only to do quantum annealing.
+From the implementation of QAOA we can extract the QUBO and plug it into the DWAVE program.
+<p>
+The QUBO Formulation :
+<b>minimize Y=X<sup>T</sup>QX</b>
+<br>
+To convert <b>Y</b> into symmetric form we can replace <b> q<sub>ij</sub> </b>by <b>(q<sub>ij</sub>+q<sub>ji</sub>)/2</b> where i is not equal to j. 
+
+<h4>Classical Approach</h4>
+
+Using Dyamic programming the best solution is in terms of <b>O(2<sup>n</sup>)</b>. This is an exponential complexity which increases heavily with larger n.
+There are various code available online for the following subset sum problem.
+ <u>example <a href = 'https://www.geeksforgeeks.org/subset-sum-problem-dp-25/'></u></a>
+
+<h4>Timeline and individual Contribution<h4>
+<table border='2'>
+<tr>
+    <td><b>NAME/WEEK</b></td>
+    <td><b>ATHARVA GUPTA</b></td> 
+    <td><b>KUSHAL BATRA</b></td>
+     <td><b>COMMENTS</b></td>
+  </tr>
+  <tr>
+    <td><b>Week 1</b></td>
+    <td>Understand the problem. Select the algorithm to work on</td> 
+    <td>Understand the problem. Select the algorithm to work on</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><b>Oct 28</b></td>
+    <td> ---------------------</td> 
+    <td>---------------------</td>
+    <td>Feedback received from professor</td>
+  </tr>
+
+  <tr>
+    <td><b>Week 2</b></td>
+    <td>Implementation using  D-Wave(Quantum Annealing) + identify the challenges</td> 
+    <td>Implementation using  Qiskit(QAOA) + identify the challenges</td>
+    <td>discuss challenges and look for alternate solutions</td>
+  </tr>
+
+  <tr>
+    <td><b>Week 3</b></td>
+    <td>Figure out the QUBO for Subset Sum Problem + Work on Special case of Subset Sum Problem (Set Partiton problem) in DWave(Quantum Annealing)</td> 
+    <td>Figure out the QUBO for Subset Sum Problem + Work on Special case of Subset Sum Problem (Set Partiton problem) in Qiskit(QAOA) </td>
+    <td>Discuss with TA or professor on how to formulate QUBO for Subset Sum Problem and keep working on special case as a backup  </td>
+  </tr>
+
+</table>
 
 <h4>REFERENCE PAPER</h4>
 [1]  https://en.wikipedia.org/wiki/NP-completeness<br>
