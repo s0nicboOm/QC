@@ -35,6 +35,10 @@ For our project we will try to implement the <b>Subset Sum Problem</b> problem u
 In our poject we will be working on both the QAOA algorithm in Qiskit and the Quantum Annealing algorithm in DWAVE system. Objective of our project is to compare the two algorithms and try to compare the results obtained from both the methods and finally create an analysis table about it.<br>
 Finally we will be comparing these two approaches with the exsisting classical approach.
 
+<h4>Classical Approach</h4>
+
+Using Dynamic programming the best solution is in terms of <b>O(2<sup>n</sup>)</b>. This is an exponential complexity which increases heavily with larger n.
+There are various code available online for the following subset sum problem.
 
 <h4>Theory of QAOA (Quantum Approximate Optimization Algorithm)</h4>
 For combinatorial optimization, the Quantum Approximate Optimization Algorithm (QAOA)gives better results than classical algorithms.
@@ -74,9 +78,9 @@ In the Set Partiton Problem we divide the parent set into subsets such that the 
 Let <b>S={s<sub>1</sub>,s<sub>2</sub>,s<sub>3</sub>..............s<sub>m</sub>}</b>
 
 So our <b>cost function(C) = </b>difference between <b><span>&Sigma;  </span>X<sub>i</sub> S<sub>i</sub></b> and <b><span>&Sigma;  </span>S<sub>i</sub> -<span>&Sigma;  </span>X<sub>i</sub> S<sub>i</sub> </b>for <b>i =1 to m </b> in our set, where </span>X<sub>i</sub> belongs to {1,0} 1: if that element is taken in our final solution set 0: if not taken in our final solution set and <b>S<sub>i</sub> is the i<sup>th</sup></b> element in our initial set.
-On further simplification, the equation reduces to <b>c<sup>2</sup>+4X<sup>T</sup>QX</b> where <b>c=<span>&Sigma;  </span>S<sub>i</sub></b>
+On further simplification, the equation reduces to <b>c<sup>2</sup>+4X<sup>T</sup>QX</b> where <b>c=<span>&Sigma;  </span>S<sub>i</sub> , q<sub>ii</sub>= S<sub>i</sub> ( S<sub>i</sub>-C<sub>i</sub>) and  q<sub>ij</sub> = q<sub>ji</sub> = S<sub>i</sub> S<sub>j</sub></b>
 
-Hence this problem of ours can be implemented on QAOA.
+<br>Hence this problem of ours can be implemented on QAOA.
 
 <h4>Challenges in Set Partition Problem</h4>
 <ol>
@@ -86,8 +90,8 @@ Hence this problem of ours can be implemented on QAOA.
 </ol>
 
 <h4>DWave (Quantum Annealing)</h4>
-Quantum annealing (QA) is a metaheuristic for finding the global minimum of a given objective function over a given set of candidate states (candidate solutions), by a process using quantum tunneling. Quantum annealing is used mainly for problems where the search space is discrete (combinatorial optimization problems) with many local minima; such as finding the ground state of a spin glass.This system uses a 128 qubits.D-Wave's architecture differs from traditional quantum computers. It is not known to be polynomially equivalent to a universal quantum computer and, in particular, cannot execute Shor's algorithm because Shor's algorithm is not a hill climbing process. Shor's algorithm requires a universal quantum computer. D-Wave claims only to do quantum annealing.
-From the implementation of QAOA we can extract the QUBO and plug it into the DWAVE program.
+Quantum annealing (QA) is a metaheuristic for finding the global minimum of a given objective function over a given set of candidate states (candidate solutions), by a process using quantum tunneling. Quantum annealing is used mainly for problems where the search space is discrete (combinatorial optimization problems) with many local minima; such as finding the ground state of a spin glass.This system uses a 128 qubits.D-Wave's architecture differs from traditional quantum computers.<p> It is not known to be polynomially equivalent to a universal quantum computer and, in particular, cannot execute Shor's algorithm because Shor's algorithm is not a hill climbing process. Shor's algorithm requires a universal quantum computer. D-Wave claims only to do quantum annealing.
+From the implementation of QAOA we can extract the QUBO and plug it into the DWAVE program.We also have to work out the embedding for our problem 
 <p>
 The QUBO Formulation :
 <b>minimize Y=X<sup>T</sup>QX</b><br>
@@ -101,10 +105,6 @@ This information that we are extracting is from the QAOA . We will be using this
 <li>As the number of elements increases or decreases in our problem set the problem of fitting the problem in our 4x4 Bipartite graph changes.<br>
 <i><u>Solution:</u></i> We can do is implicit embedding reducing the complexity.But this may reduce the accuracy of our results. </li>
 </ol>
-<h4>Classical Approach</h4>
-
-Using Dyamic programming the best solution is in terms of <b>O(2<sup>n</sup>)</b>. This is an exponential complexity which increases heavily with larger n.
-There are various code available online for the following subset sum problem.
 
 <h4>Timeline and individual Contribution<h4>
 <table border='2'>
