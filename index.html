@@ -7,7 +7,7 @@
 <h3 >Under professor Greg Byrd</h3>
 <h3 align="right"> Atharva Gupta and Kushal Batra</h3>  
 
-       <marquee><a href="QC.pdf">Project_v1.pdf</a> |||  <a href="QC2.pdf">Project_v2.pdf</a></marquee> 
+       <marquee><a href="QC.pdf">Project_v1.pdf</a> |||  <a href="QC2.pdf">Project_v2.pdf |||  <a href="QC3.pdf">Final.pdf</a></marquee> 
 
 
 
@@ -40,23 +40,25 @@ Finally we will be comparing these two approaches with the exsisting classical a
 Using Dynamic programming the best solution is in terms of <b>O(2<sup>n</sup>)</b>. This is an exponential complexity which increases heavily with larger n.
 There are various code available online for the following subset sum problem.
 
-<h4>Theory of QAOA (Quantum Approximate Optimization Algorithm)</h4>
-For combinatorial optimization, the Quantum Approximate Optimization Algorithm (QAOA)gives better results than classical algorithms.
-The heart of the QAOA relies on the use of unitary operators dependent on 2 p angles, where p > 1 is an input integer. These operators are iteratively applied on a state that is an equal-weighted quantum superposition of all the possible states in the computational basis. In each iteration, the state is measured in the computational basis and 
+<h4>Theory of VQE (Quantum Approximate Optimization Algorithm) and QAOA</h4>
+For combinatorial optimization, the Variational-Quantum-Eigensolver (VQE) gives better results than classical algorithms.
+The Variational-Quantum-Eigensolver (VQE) [1, 2] is a quantum/classical hybrid algorithm that can be used to find eigenvalues of a (often large) matrix 
+H. When this algorithm is used in quantum simulations, H is typically the Hamiltonian of some system. In this hybrid algorithm a quantum subroutine is run inside of a classical optimization loop. The quantum subroutine has two fundamental steps:</br>
+1 . Prepare the quantum state <b> |Ψ(vec(θ))⟩</b>, often called the ansatz.</br>
+2 . Measure the expectation value  <b>⟨Ψ(vec(θ))|H|Ψ(vec(θ))⟩</b>.
+(<i><a href='https://grove-docs.readthedocs.io/en/latest/vqe.html'>source</a></i>)<p>
+
+So the VQE algorithm works as a subrotine to our QAOA algorithm. This VQE is used to solve minimize/maximize the parameterss for our ising Hamiltonian generated.The heart of the QAOA relies on the use of unitary operators dependent on 2 p angles, where p > 1 is an input integer. These operators are iteratively applied on a state that is an equal-weighted quantum superposition of all the possible states in the computational basis. In each iteration, the state is measured in the computational basis and 
+
 <b>C ( z )</b> is calculated. After a sufficient number of repetitions, the value of <b>C ( z )</b> is almost optimal, and the state being measured is close to being optimal as well. 
-(<i>source : <a href='https://en.wikipedia.org/wiki/Quantum_optimization_algorithms'> wikipedia</a></i>)
-Combinatorial optimization problems are speciﬁed by n bits and m clauses. Each clause
-is a constraint on a subset of the bits which is satisﬁed for certain assignments of those bits
-and unsatisﬁed for the other assignments. The objective function, deﬁned on n bit strings,
-is the number of satisﬁed clauses,
-<b>C(z) = <span>&Sigma;  </span>C<sub>α</sub>(z)</b>
-where <b>z = z <sub>1</sub>,z <sub>2</sub> ...,z<sub>n</sub></b> is the bit string and <b>C<sub>α</sub>(z) = 1 </b>if z satisﬁes clause α and 0 otherwise. Typically <b>C<sub>α</sub></b> depends on only a few of the n bits. Satisﬁability asks if there is a stringthat satisﬁes every clause. In the QAOA algorithm our motive is to find Approximate Optimization(To find a string (z) for which <b>C(z)</b> is close to the maximum).
+
+(<i>source : <a href='https://en.wikipedia.org/wiki/Quantum_optimization_algorithms'> wikipedia</a></i>).<p>The QAOA algorithm solves the Combinatorial optimization problems are speciﬁed by n bits and m clauses. Each clause is a constraint on a subset of the bits which is satisﬁed for certain assignments of those bits and unsatisﬁed for the other assignments. The objective function, deﬁned on n bit strings, is the number of satisﬁed clauses, <b>C(z) = <span>&Sigma;  </span>C<sub>α</sub>(z)</b> where <b>z = z <sub>1</sub>,z <sub>2</sub> ...,z<sub>n</sub></b> is the bit string and <b>C<sub>α</sub>(z) = 1 </b>if z satisﬁes clause α and 0 otherwise. Typically <b>C<sub>α</sub></b> depends on only a few of the n bits. Satisﬁability asks if there is a stringthat satisﬁes every clause. In the QAOA algorithm our motive is to find Approximate Optimization(To find a string (z) for which <b>C(z)</b> is close to the maximum).
 
 
 <h4>QAOA (Qiskit) for our problem</h4>
-To implement QAOA we will be using Qiskit Aqua as it has well pre-defined libraries to make our task simpler. The Qiskit itself provides implementation examples of TSP problem,Vertex cut problem which act as the foundation for our implementation.The next step in designing the QAOA is to create a cost function for our problem. This will be really helpful because using this we can also design the QUBO for our DWAVE simulation. Also we will be trying to show the reslts obtained using SPSA and COBYLA optimizers.
+To implement QAOA we will be using Qiskit Aqua as it has well pre-defined libraries to make our task simpler. The Qiskit itself provides implementation examples of TSP problem,Vertex cut problem which act as the foundation for our implementation.The next step in designing the QAOA is to create a cost function for our problem. This will be really helpful because using this we can also design the QUBO for our DWAVE simulation. Also we will be trying to show the results obtained using SPSA optimizers for different circuit depths and different number of trial runs.
 <br>
-<i>One assumption we have made for our problem is that we have the sum m in the subset that we are asking our code to find</i> <br>
+<i>One assumption we have made for our problem is that the sum we are required to find is possible to achieve from our parent set</i> <br>
 So let us assume that the cost function for our problem is C. <br><br> <b>C =   <span>&Sigma;  </span>X<sub>i</sub> a<sub>i</sub></b> for i =1 to number of elements in our set, where <b></span>X<sub>i</sub></b> belongs to {1,0} 1: if that element is taken in our final solution set 0: if not taken in our final solution set and a<sub>i</sub> is the i<sup>th</sup> element in our initial set.
  
 
@@ -64,30 +66,21 @@ So let us assume that the cost function for our problem is C. <br><br> <b>C =   
 <h4>Challenges with this cost function</h4>
 <ol>
 <li>The cost function is known but it's QUBO formulation is still unknown. </li>
-<i><u>Reason</u></i> The above Cost function we have written is not in the form QUBO. The QUBO format should be in terms of <b> X<sup>T</sup>QX </b>which is not the case with us. This is essential because in QAOA or any other optimization algorithm, the first step is to generate the QUBO and then try to minimize or maximize it. But the cost function we have is not in that form.
+<i><u>Reason</u></i> The above Cost function we have written is not in the form QUBO (2 ising model Hamiltonian ). The QUBO format should be in terms of <b> X<sup>T</sup>QX </b>which is not the case with us. This is essential because in QAOA or any other optimization algorithm, the first step is to generate the QUBO and then try to minimize or maximize it. But the cost function we have is not in that form.<br>
+<i><u>Solution 1 :</u></i> Use of Docplex. This is a IBM designed optimization library which takes input in terms of classical function and returns the QUBO form i.e in 2 ising model Hamiltonian form. To obtain the accurate Hamiltonian from Docplex we need to optimize our function and add constraints to our functionto obtain best hamiltonian for our problem. The issue with this is that there are no specific constraints for our problem. So the Hamiltonian we construct is not in the best optimzed form. 
+<br><i><u>Solution 2 : </u></i> Use of libraby PyQubo. This is another alternative to our problem which generates the QUBO (2 ising model Hamiltonian) directly without adding any constraints to our input function.
 <br>
 <li>Let us for a while assume that the cost function we established is correct. The problem arises is to determine what the minimum energy level will be for the given sum.</li>
-<i><u>Reason</u></i> We dont know whether minimizing or maximizing the cost function will yield lowest energy level or not. 
+<i><u>Reason</u></i> We don't know whether minimizing or maximizing the cost function will yield the lowest energy level or not. 
+<br><i><u>Solution: </u></i> As now we are able to formulate our problem in terms of Hamiltonian ,we now can minimize our energy levels for our correct solution. 
+
 </ol>
 
 
-<b><i>After researching about the QUBO formulation and the theory behind it (like what are the constraints of establishing the QUBO given the constraints in 2-ising Hamiltonian model etc) we are still brainstorming about this formulation.We also analyzed whether even it is possible to construct QUBO for the problem or not using the Quantum Apprentice sheet(for 2 qubit ,3 qubit,4 qubit,5 qubit and 6 qubit) which indicates that the solution for this problem is feasible but the approach to identify it mathematically is difficult. We have also played with and understood the working of Vehicle Routing problem code available on Qiskit. The major thing that we need to proceed with is to generate the cost function. Once we achieve this we can plug this into our code. </i></b><br><br>
-<br>In the paper <b>"Quantum Algorithms of the Subset-Sum Problem on a Quantum Computer" </b>by <b>Weng-Long Chang et al</b> the authors discuss the approach of using Nuclear Magnetic resonance(<b>NMR</b>) to solve this problem.As discussed by authors in the paper they have stated that the QUBO implementation for the problem is challenging.<p>  
-So the above two challenges are crucial for the given problem. We are still working to overcome these challenges but if time does not permit then we are planning to implement a special variation of Subset Sum Problem which is Set Partition Problem using both QAOA and DWave system. 
-In the Set Partiton Problem we divide the parent set into subsets such that the sum of these two subsets are equal for this problem we can device the QUBO in the following manner -<br><br>
-Let <b>S={s<sub>1</sub>,s<sub>2</sub>,s<sub>3</sub>..............s<sub>m</sub>}</b>
-
-So our <b>cost function(C) = </b>difference between <b><span>&Sigma;  </span>X<sub>i</sub> S<sub>i</sub></b> and <b><span>&Sigma;  </span>S<sub>i</sub> -<span>&Sigma;  </span>X<sub>i</sub> S<sub>i</sub> </b>for <b>i =1 to m </b> in our set, where </span>X<sub>i</sub> belongs to {1,0} 1: if that element is taken in our final solution set 0: if not taken in our final solution set and <b>S<sub>i</sub> is the i<sup>th</sup></b> element in our initial set.
-On further simplification, the equation reduces to <b>c<sup>2</sup>+4X<sup>T</sup>QX</b> where <b>c=<span>&Sigma;  </span>S<sub>i</sub> , q<sub>ii</sub>= S<sub>i</sub> ( S<sub>i</sub>-C<sub>i</sub>) and  q<sub>ij</sub> = q<sub>ji</sub> = S<sub>i</sub> S<sub>j</sub></b>
-
-<br>Hence this problem of ours can be implemented on QAOA.
-
-<h4>Challenges in Set Partition Problem</h4>
-<ol>
-<li>Try to figure out the Data Structure to store the QUBO. All the problems described in the Qiskit are for graps and our example does not deal with graphs.</li>
-<li>How many elements can we have in our set?</li>
-<li>Instead of two can we make 3 or more subsets such that some is equal for all of them?</li>
-</ol>
+<b><i><br>Also, in the paper <b>"Quantum Algorithms of the Subset-Sum Problem on a Quantum Computer" </b>by <b>Weng-Long Chang et al</b> the authors discuss the approach of using Nuclear Magnetic resonance(<b>NMR</b>) to solve this problem.As discussed by authors in the paper they have stated that the QUBO implementation for the problem is challenging.</b></i><p>
+So we use the approach of Docplex and Pyqubo to solve our problem. We use PyQubo to generate our Hamiltonian and then we feed it to our docplex for minimiaztion. We could have just skipped the use of Docplex but then it is a better wrapper class for the Qiskit Aqua so we used it.
+ <p>
+ 
 
 <h4>DWave (Quantum Annealing)</h4>
 Quantum annealing (QA) is a metaheuristic for finding the global minimum of a given objective function over a given set of candidate states (candidate solutions), by a process using quantum tunneling. Quantum annealing is used mainly for problems where the search space is discrete (combinatorial optimization problems) with many local minima; such as finding the ground state of a spin glass.This system uses a 128 qubits.D-Wave's architecture differs from traditional quantum computers.<p> It is not known to be polynomially equivalent to a universal quantum computer and, in particular, cannot execute Shor's algorithm because Shor's algorithm is not a hill climbing process. Shor's algorithm requires a universal quantum computer. D-Wave claims only to do quantum annealing.
@@ -103,10 +96,10 @@ This information that we are extracting is from the QAOA . We will be using this
 <h4>Challenges in DWave</h4>
 <ol>
 <li>As the number of elements increases or decreases in our problem set the problem of fitting the problem in our 4x4 Bipartite graph changes.<br>
-<i><u>Solution:</u></i> We can do is implicit embedding reducing the complexity.But this may reduce the accuracy of our results. </li>
+<i><u>Solution:</u></i> We can do is implicit embedding reducing the complexity. But this may reduce the accuracy of our results. </li>
 </ol>
 
-<h4>Timeline and individual Contribution<h4>
+<h4>Timeline and individual Contribution</h4>
 <table border='2'>
 <tr>
     <td><b>NAME/WEEK</b></td>
@@ -136,9 +129,15 @@ This information that we are extracting is from the QAOA . We will be using this
 
   <tr>
     <td><b>Week 3</b></td>
-    <td>Figure out the QUBO for Subset Sum Problem + Work on Special case of Subset Sum Problem (Set Partiton problem) in DWave(Quantum Annealing)</td> 
-    <td>Figure out the QUBO for Subset Sum Problem + Work on Special case of Subset Sum Problem (Set Partiton problem) in Qiskit(QAOA) </td>
+    <td>Figure out the QUBO for Subset Sum Problem + Work on Docplex and PyQubo</td> 
+    <td>Figure out the QUBO for Subset Sum Problem + Work on Docplex and PyQubo</td>
     <td>Discuss with TA or professor on how to formulate QUBO for Subset Sum Problem and keep working on special case as a backup  </td>
+  </tr>
+  <tr>
+    <td><b>Nov 12</b></td>
+    <td> ---------------------</td> 
+    <td>---------------------</td>
+    <td>Feedback received from professor</td>
   </tr>
 <tr>
     <td><b>Week 4</b></td>
@@ -153,6 +152,33 @@ This information that we are extracting is from the QAOA . We will be using this
     <td>Discuss and create final report for our solution</td>
 </tr>
 </table>
+
+<h4>Results and discussions</h4>
+<ol>
+<li><b>Analyzing results from DWAVE</b>
+	<ul>
+	<li><b>Three elements in the set: Occurences (correct solution) vs the chain strength</b><p> We ran a simple for loop for 'chain strength' from 0 -> 100 (with increment of 5) to determine the variations in our occurence of our chain strength. For this particular example, in our set we had elements {2 , 2 , 4} and the sum to find = k = 4. We observe that for this particular the subset solution we have 2 soloutions {2 , 2} and {4}. In our solution both the solutions have the negative energy levels. We observe that the graph has a peak at chain strength = 5. We ran our code for different sets and for different sets of the element. We saw that chain strength = 5 gives best result for sets where the number of sets in the set = 3. With increase in this cardinality of strength, we get increase in the chain strength value. <br><img src="1.png" width="300" height="200"><img src="2.png" width="300" height="200"> <br>The first graph is for 'chain strength' from 0 -> 10 (with increment of 5). The second graph is chain strength from 0->5 (with increment of 0.5) </li>
+	<li><b>Processing time vs chain strength</b><p>This graph had an interseting pattern. When the chain strength crosses the point of 25 the processing time decrease. There can be two reasons for this. Firstly, as chain strength increases the solution {2,2} chances/occurences increases.(As coupling strength is high). Secondly, it might be possible that till chain strength 20 the servers were busy and hence the high processing time. We ruled out the second scenario by running our solutions 3 times and still obtained somewhat same graph.</li><br><br><img src="3.png" width="300" height="200"><img src="4.png" width="300" height="200"><br>The first graph is for 'chain strength' from 0 -> 50 (with increment of 5). The second graph is chain strength from 0->10 (with increment of 1).</li>
+</ul>
+
+<li><b>Analyzing results from QISKIT</b>
+	<ul>
+	<li><b>3 elements in the set: Processing Time vs the circuit depth</b><p> </li> We initially expected the graph between time vs depth to be exponential but our results show that this dependence of time on depth of the circuit is linear. We were not able to assess the reason for this behaviour. <br><img src="5.png" width="300" height="200"></li><br>
+	<li><b>The Subset-Sum Objective vs depth</b><p></li> As expeected from the graph, more depth we add to the circuit more accurate the results we obtain. Subset Sum objective for the correct solution should be zero. So the graph turns out to be a graph in terms of error deviation from 0 with respect to depth of the circuit. <br><img src="6.png" width="300" height="200"></li>
+
+<li><b>The Circuir for three elements in our set obtained from QISKIT</b><p><img src="7.png" width="600" height="400"></li>
+</ul>
+<li><b>Comparing the results from QISKIT and DWAVE</b>
+	
+
+
+
+
+
+</ol>
+	
+
+
 
 <h4>REFERENCE PAPER</h4>
 [1]  https://en.wikipedia.org/wiki/NP-completeness<br>
