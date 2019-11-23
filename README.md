@@ -1,6 +1,6 @@
 #Libraries used in the project:
 
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt<br>
 import matplotlib.axes as axes
 %matplotlib inline
 import numpy as np
