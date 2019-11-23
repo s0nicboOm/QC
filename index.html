@@ -29,11 +29,11 @@ The <b>Subset Sum Problem</b> can be thought of as a modification to <b>knapsack
 
 <h4> PROJECT APPROACH </h4>
 
-For our project we will try to implement the <b>Subset Sum Problem</b> problem using Quantum Computers.So suppose we have 'x' elements in our set and we are supposed to find the subset with 'm' elements such that <i>m<=x</i> and the sum of 'm' elements =0. So to work with Quantum Circuits we wll have 'x' Qubits as our input to the circuit and then the output will be in terms of quibit value {0,1}. If the i<sup>th </sup>line's output is '0' it signifies that the i<sup>th  </sup> element is not included in our answer. Similarly, If the i<sup>th  </sup>line's output is '1' it signifies that the i<sup>th  </sup> element is included in our answer. 
+For our project, we will try to implement the <b>Subset Sum Problem</b> problem using Quantum Computers.So suppose we have 'x' elements in our set and we are supposed to find the subset with 'm' elements such that <i>m<=x</i> and the sum of 'm' elements =0. So, to work with Quantum Circuits we will have 'x' Qubits as our input to the circuit and then the output will be in terms of quibit value {0,1}. If the i<sup>th </sup>line's output is '0' it signifies that the i<sup>th  </sup> element is not included in our answer. Similarly, If the i<sup>th  </sup>line's output is '1' it signifies that the i<sup>th  </sup> element is included in our answer. 
 <br>
 <br>
-In our poject we will be working on both the QAOA algorithm in Qiskit and the Quantum Annealing algorithm in DWAVE system. Objective of our project is to compare the two algorithms and try to compare the results obtained from both the methods and finally create an analysis table about it.<br>
-Finally we will be comparing these two approaches with the exsisting classical approach.
+In our poject, we will be working on both the QAOA algorithm in Qiskit and the Quantum Annealing algorithm in DWAVE system. The objective of our project is to compare the two algorithms and try to compare the results obtained from both the methods and finally create an analysis table about it.<br>
+Finally, we will be comparing these two approaches with the existing classical approach.
 
 <h4>Classical Approach</h4>
 
@@ -65,19 +65,19 @@ So let us assume that the cost function for our problem is C. <br><br> <b>C =   
 
 <h4>Challenges with this cost function</h4>
 <ol>
-<li>The cost function is known but it's QUBO formulation is still unknown. </li>
+<li>The cost function is known but its QUBO formulation is still unknown. </li>
 <i><u>Reason</u></i> The above Cost function we have written is not in the form QUBO (2 ising model Hamiltonian ). The QUBO format should be in terms of <b> X<sup>T</sup>QX </b>which is not the case with us. This is essential because in QAOA or any other optimization algorithm, the first step is to generate the QUBO and then try to minimize or maximize it. But the cost function we have is not in that form.<br>
-<i><u>Solution 1 :</u></i> Use of Docplex. This is a IBM designed optimization library which takes input in terms of classical function and returns the QUBO form i.e in 2 ising model Hamiltonian form. To obtain the accurate Hamiltonian from Docplex we need to optimize our function and add constraints to our functionto obtain best hamiltonian for our problem. The issue with this is that there are no specific constraints for our problem. So the Hamiltonian we construct is not in the best optimzed form. 
-<br><i><u>Solution 2 : </u></i> Use of libraby PyQubo. This is another alternative to our problem which generates the QUBO (2 ising model Hamiltonian) directly without adding any constraints to our input function.
+<i><u>Solution 1 :</u></i> Use of Docplex. This is a IBM designed optimization library which takes input in terms of classical function and returns the QUBO form i.e in 2 ising model Hamiltonian form. To obtain the accurate Hamiltonian from Docplex we need to optimize our function and add constraints to our function to obtain te best hamiltonian for our problem. The issue with this is that there are no specific constraints for our problem. So the Hamiltonian we construct is not in the optimized form. 
+<br><i><u>Solution 2 : </u></i> Use of library PyQubo. This is another alternative to our problem which generates the QUBO (2 ising model Hamiltonian) directly without adding any constraints to our input function.
 <br>
 <li>Let us for a while assume that the cost function we established is correct. The problem arises is to determine what the minimum energy level will be for the given sum.</li>
 <i><u>Reason</u></i> We don't know whether minimizing or maximizing the cost function will yield the lowest energy level or not. 
-<br><i><u>Solution: </u></i> As now we are able to formulate our problem in terms of Hamiltonian ,we now can minimize our energy levels for our correct solution. 
+<br><i><u>Solution: </u></i> As now we are able to formulate our problem in terms of Hamiltonian, we now can minimize our energy levels for our correct solution. 
 
 </ol>
 
 
-<b><i><br>Also, in the paper <b>"Quantum Algorithms of the Subset-Sum Problem on a Quantum Computer" </b>by <b>Weng-Long Chang et al</b> the authors discuss the approach of using Nuclear Magnetic resonance(<b>NMR</b>) to solve this problem.As discussed by authors in the paper they have stated that the QUBO implementation for the problem is challenging.</b></i><p>
+<b><i><br>Also, in the paper <b>"Quantum Algorithms of the Subset-Sum Problem on a Quantum Computer" </b>by <b>Weng-Long Chang et al</b> the authors discuss the approach of using Nuclear Magnetic resonance(<b>NMR</b>) to solve this problem.As discussed by authors in the paper they have stated that the QUBO implementation for the problem is challenging.<a href="paper.pdf">(link to paper)</a></b></i><p>
 So we use the approach of Docplex and Pyqubo to solve our problem. We use PyQubo to generate our Hamiltonian and then we feed it to our docplex for minimiaztion. We could have just skipped the use of Docplex but then it is a better wrapper class for the Qiskit Aqua so we used it.
  <p>
  
@@ -157,11 +157,11 @@ This information that we are extracting is from the QAOA . We will be using this
 <ol>
 <li><b>Analyzing results from DWAVE</b>
 	<ul>
-	<li><b>Three elements in the set: Occurences (correct solution) vs the chain strength</b><p> We ran a simple for loop for 'chain strength' from 0 -> 100 (with increment of 5) to determine the variations in our occurence of our chain strength. For this particular example, in our set we had elements {2 , 2 , 4} and the sum to find = k = 4. We observe that for this particular the subset solution we have 2 soloutions {2 , 2} and {4}. In our solution both the solutions have the negative energy levels. We observe that the graph has a peak at chain strength = 5. We ran our code for different sets and for different sets of the element. We saw that chain strength = 5 gives best result for sets where the number of sets in the set = 3. With increase in this cardinality of strength, we get increase in the chain strength value. <br>
+	<li><b>Three elements in the set: Occurrences (correct solution) vs the chain strength</b><p> We ran a simple for loop for 'chain strength' from 0 -> 50 (with an increment of 5) to determine the variations in the occurrence of our chain strength. For this particular example, in our set we had elements {2 , 2 , 4} and the sum to find = k = 4. We observe that for this particular the subset solution we have 2 solutions {2 , 2} and {4}. In the solution, both the solutions have negative energy levels. We observe that the graph has a peak at chain strength = 5. We ran our code for different sets and for different sets of the element. We saw that chain strength = 5 gives best result for sets where the number of sets in the set = 3. With an increase in this cardinality of strength, we get an increase in the chain strength value. <br>
 <figure><img src="1.png" width="300" height="200"><figcaption>Fig.1</figcaption>
 <img src="2.png" width="300" height="200"><figcaption>Fig.2</figcaption></figure>
- <br>The first graph is for 'chain strength' from 0 -> 10 (with increment of 5). The second graph is chain strength from 0->5 (with increment of 0.5) </li>
-	<li><b>Processing time vs chain strength</b><p>This graph had an interseting pattern. When the chain strength crosses the point of 25 the processing time decrease. There can be two reasons for this. Firstly, as chain strength increases the solution {2,2} chances/occurences increases.(As coupling strength is high). Secondly, it might be possible that till chain strength 20 the servers were busy and hence the high processing time. We ruled out the second scenario by running our solutions 3 times and still obtained somewhat same graph.</li><br><br>
+ <br>The first graph is for 'chain strength' from 0 -> 50 (with increment of 5). The second graph is chain strength from 0->5 (with increment of 0.5) </li>
+	<li><b>Processing time vs chain strength</b><p>This graph had an interesting pattern. When the chain strength crosses the point of 25 the processing time decrease. There can be two reasons for this. Firstly, as chain strength increases the solution {2,2} chances/occurrences increases (as coupling strength is high). Secondly, it might be possible that till chain strength 20 the servers were busy and hence the high processing time. We ruled out the second scenario by running our solutions 3 times and still obtained somewhat same graph.</li><br><br>
 <figure><img src="3.png" width="300" height="200"><figcaption>Fig.1</figcaption></figure>
 <figure><img src="4.png" width="300" height="200"><figcaption>Fig.2</figcaption></figure>
 <br>
@@ -183,15 +183,17 @@ The first graph is for 'chain strength' from 0 -> 50 (with increment of 5). The 
 </ol>
 <h4>Comparing the results from QISKIT and DWAVE</h4>
 <ol>
-<li><b>Processing Time</b>
-<ul>
 <li>The solution obtained from DWave takes less time to compute results as compared to Qiskit Aqua (with minimim depth). This information can be extracted by comparing the graphs in fig 1 and fig  5</li>
 <li>When n (#no. of elements in the set increases) increases the solution sample also degrades exponentilly in both Dwave and Qiskit. The degardation trend is more prominenet in case of Dwave when compared with Qiskit.</li>
 <li>Weakness with Dwave is that as the problem set space increases the number of used qubit also increases and in Dwave the  chimera graph is not completely uniform. In case of Qiskit , the number of qubo's are limited with the IBM's quantum achitecture.</li>
-</ul>
 </ol>
 
-	
+<h4>Future Work</h4>
+<ul>
+<li> Try to implement manual embedding for Dwave solution to increase purity of our solution states. This is because when we are dealing with n>=10 our solution sets start giving impure states.</li>
+<li>Similarly in QAOA if we are able to generate the Hamiltonian using some other method instead of Docplex or PyQubo we will get better and faster solution. This is because Docplex and Pyqubo are libraries which are operated or executed in classical computer.
+</li>
+</ul>
 	
 <h4>REFERENCE PAPER</h4>
 [1]  https://en.wikipedia.org/wiki/NP-completeness<br>
